@@ -1,7 +1,14 @@
 <template>
     <div class="wrapper">
 
-        <header class="header">header</header>
+        <header class="header">
+            <p class="header__logo-name">TravelWeb</p>
+            <button class="header__button">
+                <span class="material-symbols-outlined">
+                    person
+                </span>
+            </button>
+        </header>
 
         <main class="main">
 
@@ -42,11 +49,12 @@ onMounted(() => {
 
 <style>
 @import '~@csstools/normalize.css';
-@import url('https://fonts.googleapis.com/css2?family=Pangolin&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 
 :root {
     --sync: calc(1vw + 1vh);
     --border: 1px solid white;
+    --green: rgb(64, 175, 140);
 }
 
 body {
@@ -76,11 +84,29 @@ body {
 
 .header {
     position: absolute;
-    width: 100%;
+    right: 0;
+    left: 0;
+    height: 40px;
     display: flex;
+    justify-content: space-between;
+    padding: 0 20px;
     align-items: center;
-    border-bottom: var(--border);
+    border-bottom: 1px solid var(--green);
     z-index: 10;
+    background-color: rgba(0, 0, 0, 0.36);
+}
+.header__logo-name{
+    color: var(--green);
+    font-weight: 700;
+    font-size: calc(var(--sync) / 1.17);
+    font-family: 'Ubuntu', sans-serif;
+    cursor: default;
+}
+.header__button{
+    background: none;
+    border: none;
+    color: var(--green);
+    cursor: pointer;
 }
 
 .main {
@@ -107,10 +133,13 @@ body {
 .main__title{
     position: relative;
     top: 50px;
-    font-family: 'Pangolin', cursive;
-    text-shadow: 1px 1px 20px rgba(0, 0, 0, 0.449);
-    font-size: 4em;
+    color: var(--green);
+    transform: translate(calc((var(--scrollTop) / 12)), calc((var(--scrollTop) / 4)));
+    font-family: 'Ubuntu', sans-serif;
+    text-shadow: 0px 5px 50px rgba(255, 255, 255, 0.514);
+    font-size: calc(var(--sync) * 2.8);
 }
+
 .layer{
     position: absolute;
     width: 100%;
@@ -120,14 +149,14 @@ body {
 }
 .layer__front{
     background-image: url(./images/main--front.png);
-    transform: translate3d(0, calc((var(--scrollTop) / -14)), 0);
+    transform: translate3d(0, calc((var(--scrollTop) / -10)), 0);
     z-index: 5;
     background-size: cover;
     background-position: center;
 }
 .layer__middle{
     background-image: url(./images/main--middle.png);
-    transform: translate3d(0, calc((var(--scrollTop) / -12)), 0);
+    transform: translate3d(0, calc((var(--scrollTop) / -8)), 0);
     z-index: 4;
     background-size: cover;
     background-position: center;
@@ -159,4 +188,5 @@ body {
     display: flex;
     align-items: center;
     border-top: var(--border);
-}</style>
+}
+</style>
