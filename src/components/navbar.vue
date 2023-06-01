@@ -40,9 +40,6 @@
     font-size: calc(var(--sync) / 1.17);
     font-family: 'Ubuntu', sans-serif;
     cursor: default;
-    -webkit-transform: translate(calc(var(--mouseMoveX) / 250), calc(var(--mouseMoveY) / 250));
-    -ms-transform: translate(calc(var(--mouseMoveX) / 250), calc(var(--mouseMoveY) / 250));
-    transform: translate(calc(var(--mouseMoveX) / 250), calc(var(--mouseMoveY) / 250));
 }
 .header__button{
     background: none;
