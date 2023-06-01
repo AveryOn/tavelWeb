@@ -29,7 +29,7 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    z-index: 9;
+    z-index: 10;
     border-bottom: 1px solid var(--green);
     background-color: rgba(0, 0, 0, 0.36);
 }

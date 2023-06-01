@@ -1,35 +1,37 @@
 <template>
     <div class="wrapper">
+        <div class="content">
+            <navbar-comp @openLogup="openLogup"></navbar-comp>
+    
+            <main class="main">
+    
+                <!-- Первая Заглавная секция с параллакс эффектом -->
+                <div class="main__block">
+                    <div class="layer layer__front"></div>
+                    <div class="layer layer__middle"></div>
+                    <h1 class="main__title">Unbelievable adventures!</h1>
+                    <!--  -->
+                    <!-- Меню для регистрации и авторизации пользователя -->
+                    <menuLogup 
+                    @closeLogup="closeLogup"
+                    >
+                    </menuLogup>
+                
+                </div>
+                
+                <!-- Разделитель секций -->
+                
+                <!-- Вторая секция с контентом -->
+                <div class="main__basic">
+                    <div class="separator-section"></div>
+    
+                </div>
+    
+            </main>
+    
+            <footer-comp>Footer!</footer-comp>
 
-        <navbar-comp @openLogup="openLogup"></navbar-comp>
-
-        <main class="main">
-
-            <!-- Первая Заглавная секция с параллакс эффектом -->
-            <div class="main__block">
-                <div class="layer layer__front"></div>
-                <div class="layer layer__middle"></div>
-                <h1 class="main__title">Unbelievable adventures!</h1>
-                <!--  -->
-                <!-- Меню для регистрации и авторизации пользователя -->
-                <menuLogup 
-                @closeLogup="closeLogup"
-                >
-                </menuLogup>
-            
-            </div>
-            
-            <!-- Разделитель секций -->
-            
-            <!-- Вторая секция с контентом -->
-            <div class="main__basic">
-                <div class="separator-section"></div>
-
-            </div>
-
-        </main>
-
-        <footer-comp>Footer!</footer-comp>
+        </div>
 
     </div>
 </template>
@@ -44,14 +46,25 @@ import menuLogup from '@/components/menuLogup.vue';
 import footerComp from '@/components/footer.vue'
 
 // Вспомогательные инструменты
-import computedMouseMove from '@/tools/computedMoseMove.js'
-import { gsap } from 'gsap';
+import computedMouseMove from '@/tools/computedMoseMove.js';
+import gsap from 'gsap';
+
+
+
+// // Регистрация плагинов gsap для плавной прокрутки страницы
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+ScrollSmoother.create({
+    wrapper: '.wrapper',
+    content: '.content',
+});
+
 
 const data = {
     isShowLogup: ref(true),
     mainText: ref(''),
     isScroll: ref(false),
 }
+
 
 function openLogup() {
     // data.isShowLogup.value = true;
@@ -61,8 +74,11 @@ function closeLogup() {
     // data.isShowLogup.value = false;
     gsap.to('.menu-logup', { width: '0' , duration: 1});
 };
-
 onMounted(() => {
+    
+    console.log(ScrollSmoother, ScrollTrigger);
+
+    
     if(window.scrollY === 0){
         data.isScroll.value = false
     }
@@ -102,7 +118,7 @@ body {
     color: whitesmoke;
 }
 
-.wrapper {
+.content {
     position: relative;
     width: 100%;
     height: -webkit-max-content;
@@ -119,6 +135,7 @@ body {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    overflow: hidden;
 }
 .main {
     width: 100%;
@@ -139,8 +156,6 @@ body {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
-    overflow: hidden;
-    z-index: 0;
     /* border: var(--border); */
 }
 
@@ -186,7 +201,7 @@ body {
     -webkit-transform: translate3d(0, calc((var(--scrollTop) / -10)), 0);
     transform: translate3d(0, calc((var(--scrollTop) / -10)), 0);
     /* transform: translate3d(calc(var(--mouseMoveX) / 250), calc(var(--mouseMoveY) / 250), 0); */
-    z-index: 12;
+    z-index: 9;
     background-size: cover;
     background-position: center;
 }
