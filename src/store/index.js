@@ -1,18 +1,23 @@
 import { createStore } from 'vuex'
 
 export default createStore({
-  state: {
-    
-  },
-  getters: {
+    state: {
+        isShowLogup: false,
+    },
+    getters: {
 
-  },
-  mutations: {
+    },
+    mutations: {
+        showLogup(state){
+            state.isShowLogup = true;
+        },
+        hiddenLogup(state){
+            state.isShowLogup = false;
+        }
+    },
+    actions: {
 
-  },
-  actions: {
-
-  },
-  modules: {
-  }
+    },
+    modules: {
+    }
 })

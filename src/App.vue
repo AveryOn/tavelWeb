@@ -4,11 +4,11 @@
         <div class="content">
             <menuLogup @closeLogup="closeLogup">
             </menuLogup>
-            <navbar-comp @click="data.isScrollBottom.value = !data.isScrollBottom.value" @openLogup="openLogup"></navbar-comp>
+            <navbar-comp @openLogup="openLogup"></navbar-comp>
             <main class="main">
 
                 <!-- Первая Заглавная секция с параллакс эффектом -->
-                <div class="main__block">
+                <div class="main__up">
                     <div class="layer layer__front"></div>
                     <div class="layer layer__middle"></div>
                     <h1 class="main__title">Unbelievable adventures!</h1>
@@ -22,7 +22,13 @@
 
                 <!-- Вторая секция с контентом -->
                 <div class="main__basic">
-                    <!-- <div class="separator-section"></div> -->
+
+                    <div class="layer basic-front"></div>
+                    <div class="layer basic-middle__front"></div>
+                    <div class="layer basic-middle__back"></div>
+                    <div class="layer basic-back__front"></div>
+                    <div class="layer basic-back__middle"></div>
+                    <div class="layer basic-back__back"></div>
 
                 </div>
 
@@ -40,10 +46,9 @@
 import { 
     onMounted, 
     ref, 
-    watch, 
-    reactive,
-    computed 
+    computed
 } from 'vue';
+import { useStore } from 'vuex';
 
 // Компоненты
 import navbarComp from '@/components/navbar.vue';
@@ -56,12 +61,12 @@ import gsap from 'gsap';
 import ScrollSmother from '../node_modules/gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/all';
 
+const store = useStore()
+
 const data = {
     isShowLogup: ref(true),
     mainText: ref(''),
     isScrollBottom: ref(true),
-    // Проверить используется или нет
-    isScroll: ref(false),
 }
 const loading = {
     isLoading: ref(false),
@@ -98,7 +103,7 @@ const isLoadingComputed = computed(() => {
 })
 
 onMounted(() => {
-
+    console.log();
     // console.log(window.innerHeight);
     // console.log(Math.round((document.body.clientHeight - window.innerHeight) - 20));
 
@@ -114,6 +119,11 @@ onMounted(() => {
         content: '.content',
         smooth: 2,
     })
+
+
+    // document.body.scrollTo({
+    //     top: -100,
+    // })
 
     const innerHeightBottom = +((document.body.clientHeight - window.innerHeight) - 20).toFixed();
     document.addEventListener('scroll', (e) => {
@@ -243,7 +253,7 @@ body {
     /* border: var(--border); */
 }
 
-.main__block {
+.main__up {
     width: 100%;
     min-height: 100vh;
     display: -webkit-box;
@@ -318,16 +328,58 @@ body {
 
 .main__basic {
     position: relative;
-    top: 30px;
-    scale: 1.1;
+    /* top: 30px; */
     width: 100%;
     height: 120vh;
-    z-index: 16;
-    background-image: url(./images/background-basic.jpg);
-    -webkit-transform: translate3d(0, calc((var(--scrollTop) / -14)), 0);
-    /* transform: translate3d(0, calc((var(--scrollTop) / -14)), 0); */
-    transform: translate3d(calc(var(--mouseMoveX) / 170), calc(var(--mouseMoveY) / 170), 0);
-    transition: var(--transition);
+    z-index: 16;    
+    scale: 1.1;
+}
+.layer{
+    scale: 1;
+    width: 100%;
+    height: 100%;
+}
+.basic-back__back{
+    background-image: url(./images/basic-layers/basic-back__back.png);
     background-size: cover;
     background-position: center;
-}</style>
+    transform: translate3d(calc(var(--mouseMoveX) / -380), calc(var(--mouseMoveY) / -320), 0);
+    z-index: 16;
+}
+.basic-back__middle{
+    background-image: url(./images/basic-layers/basic-back__middle.png);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--mouseMoveX) / -270), calc(var(--mouseMoveY) / -200), 0);
+    z-index: 17;
+}
+.basic-back__front{
+    background-image: url(./images/basic-layers/basic-back__front.png);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--mouseMoveX) / -350), calc(var(--mouseMoveY) / -300), 0);
+    z-index: 18;
+}
+.basic-middle__back{
+    background-image: url(./images/basic-layers/basic-middle__back.png);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--mouseMoveX) / 420), calc(var(--mouseMoveY) / 310), 0);
+    z-index: 19;
+}
+.basic-middle__front{
+    background-image: url(./images/basic-layers/basic-middle__front.png);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--mouseMoveX) / 320), calc(var(--mouseMoveY) / 230), 0);
+    z-index: 20;
+}
+.basic-front{
+    background-image: url(./images/basic-layers/basic-front.png);
+    background-size: cover;
+    background-position: center;
+    transform: translate3d(calc(var(--mouseMoveX) / 120), calc(var(--mouseMoveY) / 90), 0);
+    z-index: 21;
+}
+
+</style>
