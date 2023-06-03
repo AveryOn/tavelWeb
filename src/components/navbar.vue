@@ -11,7 +11,6 @@
 
 <script setup>
 import { onMounted, reactive } from 'vue';
-
 const scrollValues = reactive([0, 0]);
 
 onMounted(() => {
@@ -24,14 +23,11 @@ onMounted(() => {
             scrollValues.splice(0,2)
         }
         if(window.scrollY > scrollValues[scrollValues.length-2] && window.scrollY <= basicSectorPosition ){
-            console.log('DOWN');
             window.scrollTo({top: basicSectorPosition});
         }
         if(window.scrollY < scrollValues[scrollValues.length-2] && window.scrollY >= basicSectorPosition ){
-            console.log('UP');
 
         }
-        console.log(scrollValues);
         scrollValues.push(Math.round(window.scrollY))
         // console.log("Предыдущий: ", scrollValues[scrollValues.length - 2], 'Текущий: ', Math.round(window.scrollY));
 
