@@ -3,11 +3,13 @@
 
     <div class="main__basic">
 
+        
         <div class="basic__action-block">
-
+            <div class="logo">TravelWeb</div>
         </div>
-
-        <div class="layer basic-front"></div>
+        
+        <div class="layer basic-front">
+        </div>
         <div class="layer basic-middle__front"></div>
         <div class="layer basic-middle__back"></div>
         <div class="layer basic-back__front"></div>
@@ -18,12 +20,22 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue' 
+import { gsap } from 'gsap';
+import { onMounted } from 'vue'
 
 onMounted(() => {
+    const footer = document.querySelector('.footer');
+    const actBlock = document.querySelector('.basic__action-block');
+    // console.log(actBlock.clientHeight + footer.clientHeight);
+    // console.log(actBlock.offsetTop)
+    const footerHeight = +(footer.getBoundingClientRect().height).toFixed(0);
+    const actBlockHeight = +(actBlock.getBoundingClientRect().height).toFixed(0);
+    // console.log(footerHeight + actBlockHeight);
+    // console.log(footerHeight);
+
     // Присваивание CSS-переменной в action-block для определения его высоты относительно высоты монитора
-    // const actionBlock = document.querySelector('.basic__action-block');
-    // actionBlock.style.cssText += `--height-action-block: ${Math.round(window.innerHeight / 1.3)}px`;
+    const actionBlock = document.querySelector('.basic__action-block');
+    actionBlock.style.cssText += `--height-action-block: ${Math.round(window.innerHeight / 1.3)}px`;
 
 
     const innerHeightBottom = +((document.body.clientHeight - window.innerHeight) - 20).toFixed();
@@ -34,7 +46,9 @@ onMounted(() => {
     
         // Создание триггера для появления @@@, если скролл дошел до конца страницы
         if(window.scrollY >= Math.round(innerHeightBottom) / 2){
-
+            gsap.to('.basic__action-block', {bottom: '23.5vh', duration: 1});
+        }else{
+            gsap.to('.basic__action-block', {bottom: '-100vh', duration: 3});
         }
     })
 })
@@ -51,12 +65,28 @@ onMounted(() => {
     z-index: 16;    
     scale: 1.1;
 }
+.logo{
+    position: absolute;
+    top: -30px;
+    background-color: var(--green);
+    padding: 5px 15px;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    font-family: var(--font);
+    cursor: default;
+}
 .basic__action-block{
     position: absolute;
+    bottom: -100vh;
     width: 100%;
-    height: 80%;
-    background-color: rgba(0,0,0, .5);
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    height: var(--height-action-block);
+    background-color: rgba(0,0,0, .45);
     z-index: 25;
+    border-top: var(--border);
+    border-bottom: var(--border);
 }
 
                     /* НЕБО */

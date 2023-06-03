@@ -17,10 +17,10 @@
 
                 <!-- Вторая секция с контентом -->
                 <basic-main-view></basic-main-view>
-
+                
+                <footer-comp :is-scroll-bottom="data.isScrollBottom.value"></footer-comp>
             </main>
 
-            <footer-comp :is-scroll-bottom="data.isScrollBottom.value"></footer-comp>
 
         </div>
 
@@ -68,6 +68,21 @@ function closeLogup() {
 };
 
 onMounted(() => {
+    const footer = document.querySelector('.footer');
+    const actBlock = document.querySelector('.basic__action-block');
+    const mainBasic = document.querySelector('.main__basic');
+
+    const actBlockHeight = Math.round(actBlock.getBoundingClientRect().height);
+    const footerHeight = Math.round(footer.getBoundingClientRect().height);
+    const mainBasicHeight = Math.round(mainBasic.getBoundingClientRect().height);
+    console.log('actBlockHeight: ', actBlockHeight);
+    console.log('footerHeight: ', footerHeight);
+    console.log('mainBasic: ', mainBasicHeight);
+    console.log(mainBasicHeight - (actBlockHeight + footerHeight));
+    // console.log(Math.round(footer.getBoundingClientRect().height))
+    // console.log((Math.round(main__basic.getBoundingClientRect().height)));
+    // console.log(footerHeight);
+
 
     // спиннер загрузки
     const loading = document.querySelector('.loading');
@@ -113,10 +128,11 @@ onMounted(() => {
 
 :root {
     --sync: calc(1vw + 1vh);
-    --border: 1px solid white;
+    --border: 2px solid rgb(64, 175, 140);
     --green: rgb(64, 175, 140);
     --green-hover: rgb(7, 144, 101);
     --transition: transform .75 cubic-bezier(.075, .5, 0, 1);
+    --font: 'Ubuntu', sans-serif;
 }
 
 ::-webkit-scrollbar {

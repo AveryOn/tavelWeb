@@ -38,7 +38,7 @@ const props = defineProps({
 
 watch( props, (value) => {
     if(value.isScrollBottom){
-        gsap.to('.footer', { bottom: 0, duration: 1 });
+        gsap.to('.footer', { bottom: 0, duration: 0.5 });
     }else{
         gsap.to('.footer', { bottom: '-22vh', duration: 1 });
     }
