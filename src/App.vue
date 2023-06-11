@@ -1,7 +1,7 @@
 
 <template>
     <!-- спиннер загрузки -->
-    <loadingSpinUI :isLoading="false"></loadingSpinUI>
+    <loadingSpinUI :isLoading="store.state.isLoading"></loadingSpinUI>
     <div class="wrapper">
         <div class="content">
             <menuLogup @closeLogup="closeLogup">
@@ -17,7 +17,7 @@
 
                 <!-- Вторая секция с контентом -->
                 <basic-main-view></basic-main-view>
-                
+
                 <footer-comp :is-scroll-bottom="data.isScrollBottom.value"></footer-comp>
             </main>
 
@@ -30,6 +30,8 @@
 <script setup>
 // для Vue
 import { onMounted, ref } from 'vue';
+import { useStore } from 'vuex';
+const store = useStore();
 // Компоненты
 import mainUpView from '@/components/views/mainUpView.vue'
 import basicMainView from '@/components/views/basicMainView.vue';
@@ -44,47 +46,41 @@ import gsap from 'gsap';
 import ScrollSmother from '../node_modules/gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/all';
 
-
 const data = {
     isShowLogup: ref(true),
     mainText: ref(''),
     isScrollBottom: ref(true),
 }
-const loading = {
-    isLoading: ref(false),
-}
 
+// Открыть окно регистрации
 function openLogup() {
-    // data.isShowLogup.value = true;
     gsap.to('.menu-logup', { width: '30%', duration: 1 });
-    loading.isLoading.value = true;
+    gsap.to('.form-logup', { left: '', width: '', scale: 1, duration: 0.8, });
+    gsap.to('.form-logup__title', { scale: 1, duration: 0.5, delay: 0.2 });
+    gsap.to('.smiley', { scale: 1, duration: 0.5, delay: 0.2 });
+    gsap.to('.form-logup__input', { scale: 1, duration: 0.5, delay: 0.2 });
+    gsap.to('.form-logup__confirm-btn', { scale: 1, duration: 0.5, delay: 0.2 });
+    gsap.to('.form-logup__register-question', { scale: 1, duration: 0.5, delay: 0.6 });
+    gsap.to('.form-logup__login-btn', { scale: 1, duration: 0.5, delay: 0.2 });
+    gsap.to('.menu-logup__close-btn', { left: '10px', scale: 1.2, duration: 0.6, delay: 0.3 });
 };
+
+// Закрыть окно регистрации
 function closeLogup() {
-    // data.isShowLogup.value = false;
     gsap.to('.menu-logup', { width: '0', duration: 1 });
-    setTimeout(() => {
-        loading.isLoading.value = false;
-    }, 500)
+    gsap.to('.form-logup', { left: '10%', width: 0, scale: 0.8, duration: 1 });
+    gsap.to('.form-logup__title', { scale: 0, duration: 0.3 });
+    gsap.to('.smiley', { scale: 0, duration: 0.8 });
+    gsap.to('.form-logup__input', { scale: 0, duration: 0.8 });
+    gsap.to('.form-logup__confirm-btn', { scale: 0, duration: 0.8 });
+    gsap.to('.form-logup__register-question', { scale: 0, duration: 0.3 });
+    gsap.to('.form-logup__login-btn', { scale: 0, duration: 0.8 });
+    gsap.to('.menu-logup__close-btn', { left: '100%', scale: 0.2, duration: 0.4 });
 };
 
 onMounted(() => {
-    const footer = document.querySelector('.footer');
-    const actBlock = document.querySelector('.basic__action-block');
-    const mainBasic = document.querySelector('.main__basic');
-
-    const actBlockHeight = Math.round(actBlock.getBoundingClientRect().height);
-    const footerHeight = Math.round(footer.getBoundingClientRect().height);
-    const mainBasicHeight = Math.round(mainBasic.getBoundingClientRect().height);
-    console.log('actBlockHeight: ', actBlockHeight);
-    console.log('footerHeight: ', footerHeight);
-    console.log('mainBasic: ', mainBasicHeight);
-    console.log(mainBasicHeight - (actBlockHeight + footerHeight));
-    // console.log(Math.round(footer.getBoundingClientRect().height))
-    // console.log((Math.round(main__basic.getBoundingClientRect().height)));
-    // console.log(footerHeight);
-
-
     // спиннер загрузки
+    // для первоначальной загрузки страницы
     const loading = document.querySelector('.loading');
     loading.style.cssText += `--cursorX: ${Math.round(document.body.clientWidth / 2)}px`;
     loading.style.cssText += `--cursorY: ${Math.round(document.body.clientHeight / 2)}px`;
@@ -98,18 +94,17 @@ onMounted(() => {
         smooth: 2,
     })
 
-
     const innerHeightBottom = +((document.body.clientHeight - window.innerHeight) - 20).toFixed();
     document.addEventListener('scroll', (e) => {
         // Создание CSS-переменной scrollTop (Возможно не будет использоваться)
         document.body.style.cssText += `--scrollTop: ${window.scrollY}px`;
 
         // Создание триггера для появления футера, если скролл дошел до конца страницы
-        if(window.scrollY >= innerHeightBottom){
+        if (window.scrollY >= innerHeightBottom) {
             data.isScrollBottom.value = true;
-        }else{
+        } else {
             data.isScrollBottom.value = false;
-        }   
+        }
     })
 
     // Создание перменных для спиннера загрузки, и создание CSS-переменных для параллакс эффекта
@@ -133,6 +128,7 @@ onMounted(() => {
     --green-hover: rgb(7, 144, 101);
     --transition: transform .75 cubic-bezier(.075, .5, 0, 1);
     --font: 'Ubuntu', sans-serif;
+    --box-shadow: 10px 5px 15px rgba(0, 0, 0, 0.5);
 }
 
 ::-webkit-scrollbar {
@@ -161,23 +157,6 @@ body {
     background-size: cover;
     background-position: center;
     will-change: transform;
-}
-
-
-
-@keyframes loading {
-    0%{
-        border-top: 2px solid rgb(12, 255, 182);
-    }
-    25%{
-        border-right: 2px solid rgb(12, 255, 247);
-    }
-    50%{
-        border-bottom: 2px solid rgb(12, 255, 113);
-    }
-    75%{
-        border-left: 2px solid rgb(12, 247, 255);
-    }
 }
 
 .content {
@@ -222,12 +201,6 @@ body {
     /* border: var(--border); */
 }
 
-
-
-
-
-
-
 .separator-section {
     /* position: absolute; */
     top: -10px;
@@ -238,7 +211,4 @@ body {
     background-size: cover;
     background-position: center;
 }
-
-
-
 </style>
