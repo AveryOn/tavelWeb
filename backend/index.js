@@ -22,15 +22,23 @@ app.get('/', (req, res, next) => {
     res.send('Express server')
 })
 
+app.get('/all-users', (req, res, next) => {
+    actions.findAllUsers((users) => {
+        res.send(users);
+    });
+})
+
 app.post('/auth', (req, res, next) => {
     const clientData = req.body;
     res.send({Server_response: clientData})
 })
 
+
 app.post('/register', (req, res, next) => {
     const clientData = req.body;
-    actions.createUser('default', '', clientData.login, clientData.password);
-    res.send({Server_response: clientData})
+    actions.createUser('default', '', clientData.login, clientData.password, (data) => {
+        res.send(data)
+    });
 })
 
 

@@ -7,7 +7,7 @@
 
             <!-- Окно АВТОРИЗАЦИИ -->
             <div class="auth-container" v-show="!isRegister">
-                <h2 class="form-logup__title">Authorization</h2>
+                <h2 class="form-logup__title" @click="store.dispatch('getAllUsers')">Authorization</h2>
     
                 <p class="smiley">༼ つ ◕_◕ ༽つ</p>
                 <inputComp 
@@ -248,6 +248,7 @@ function checkDataRegister(){
     position: relative;
     bottom: 80px;
     font-size: calc(var(--sync));
+    cursor: default;
 }
 .smiley{
     scale: 0;

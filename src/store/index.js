@@ -86,8 +86,18 @@ export default createStore({
                 ).finally(() => {
                     commit('hiddenLoading');
                 })
-        }
-
+        },
+        getAllUsers({ state }) {
+            axios.get(state.hostServer + 'all-users')
+                .then(
+                    function (response) {
+                        console.log(response.data);
+                    },
+                    function (error) {
+                        console.log(error);
+                    }
+                )
+        },
     },
     modules: {
     }
