@@ -4,14 +4,11 @@
         <div class="layer layer__front"></div>
         <div class="layer layer__middle"></div>
         <h1 class="main__title">Unbelievable adventures!</h1>
-        <!--  -->
-        <!-- Меню для регистрации и авторизации пользователя -->
     </div>
 
 </template>
 
 <script setup>
-
 </script>
 
 <style scoped>
@@ -68,4 +65,18 @@
     font-size: calc(var(--sync) * 2.8);
 }
 
+/* DELETE!!! */
+.TEST-BLOCK{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    z-index: 9999999999999999;
+    background-color: rgba(0, 0, 0, .5);
+    width: 50%;
+    height: 50%;
+    border-radius: 30px;
+    padding: 30px;
+}
 </style>

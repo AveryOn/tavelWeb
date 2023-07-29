@@ -4,6 +4,7 @@
     <loadingSpinUI :isLoading="store.state.isLoading"></loadingSpinUI>
     <div class="wrapper">
         <div class="content">
+            <!-- Меню для регистрации и авторизации пользователя -->
             <menuLogup @closeLogup="closeLogup">
             </menuLogup>
             <navbar-comp @openLogup="openLogup"></navbar-comp>
