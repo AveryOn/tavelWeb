@@ -35,7 +35,7 @@
                 </div>
                 <!-- Кнопка включения окна РЕГИСТРАЦИИ -->
                 <p class="form-logup__register-question">Don't have an account? 
-                    <a class="form-logup__register-btn" @click="activeRegistration">Register now!</a>
+                    <a @click="activeRegistration">Register now!</a>
                 </p>
             </div>
 
@@ -215,7 +215,7 @@ function checkDataRegister(){
     align-items: center;
     justify-content: center;
     border-radius: 6px;
-    background: rgba(25, 74, 59, 0.392);
+    background: rgba(25, 74, 59, 0.4);
     backdrop-filter: blur(6px);
     box-shadow: var(--box-shadow);
     overflow: hidden;
@@ -285,10 +285,5 @@ function checkDataRegister(){
     margin: 10px 0;
     cursor: default;
 }
-.form-logup__register-btn{
-    color: rgb(30, 250, 232);
-}
-.form-logup__register-btn{
-    cursor: pointer;
-}
+
 </style>

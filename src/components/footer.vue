@@ -36,12 +36,13 @@ const props = defineProps({
     }
 })
 
-watch( props, (value) => {
-    if(value.isScrollBottom){
+watch( () => props.isScrollBottom, (value) => {
+    if(value){
         gsap.to('.footer', { bottom: 0, duration: 0.5 });
-    }else{
-        gsap.to('.footer', { bottom: '-22vh', duration: 1 });
     }
+    // else{
+    //     gsap.to('.footer', { bottom: '-22vh', duration: 1 });
+    // }
 })
 
 onMounted(() => {
@@ -70,6 +71,7 @@ onMounted(() => {
     flex-direction: column;
     color: var(--green);
     background-color: rgba(0,0,0, .4);
+    backdrop-filter: blur(2.5px);
     border-top: 2px solid var(--green);
     z-index: 20;
 }

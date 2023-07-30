@@ -42,63 +42,9 @@ export default createStore({
     actions: {
         // Авторизация и регистрация
         // Отправка полей формы АВТОРИЗАЦИИ
-        confirmAuth({ state, commit }, { login, password }) {
-            commit('showLoading');
-            console.log(login, password);
-            axios.post(state.hostServer + 'auth', {
-                login,
-                password,
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
-                .then(
-                    (response) => {
-                        console.log(response.data);
-                    }, (err) => {
-                        console.log(err);
-                    }
-                )
-                .finally(() => {
-                    commit('hiddenLoading');
-                })
-        },
 
-        // Отправка полей формы РЕГИСТРАЦИИ
-        confirmRegister({ state, commit }, { login, password, confirmPassword }) {
-            commit('showLoading');
-            axios.post(state.hostServer + 'register', {
-                login,
-                password,
-                confirmPassword
-            }, {
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                }
-            })
-                .then(
-                    (response) => {
-                        console.log(response.data);
-                    }, (err) => {
-                        console.log(err);
-                    }
-                ).finally(() => {
-                    commit('hiddenLoading');
-                })
-        },
-        getAllUsers({ state }) {
-            axios.get(state.hostServer + 'all-users')
-                .then(
-                    function (response) {
-                        console.log(response.data);
-                    },
-                    function (error) {
-                        console.log(error);
-                    }
-                )
-        },
     },
     modules: {
+        
     }
 })

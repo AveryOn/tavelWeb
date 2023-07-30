@@ -55,6 +55,7 @@ onMounted(() => {
     z-index: 10;
     border-bottom: 1px solid var(--green);
     background-color: rgba(0, 0, 0, 0.36);
+    backdrop-filter: blur(2px);
 }
 .header__logo-name{
     position: relative;

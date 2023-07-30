@@ -93,7 +93,7 @@ onMounted(() => {
         wrapper: '.wrapper',
         content: '.content',
         smooth: 2,
-    })
+    });
 
     const innerHeightBottom = +((document.body.clientHeight - window.innerHeight) - 20).toFixed();
     document.addEventListener('scroll', (e) => {
@@ -103,7 +103,8 @@ onMounted(() => {
         // Создание триггера для появления футера, если скролл дошел до конца страницы
         if (window.scrollY >= innerHeightBottom) {
             data.isScrollBottom.value = true;
-        } else {
+        } 
+        else {
             data.isScrollBottom.value = false;
         }
     })
@@ -119,13 +120,14 @@ onMounted(() => {
 </script>
 
 <style>
-@import '~@csstools/normalize.css';
+@import '~@csstools/normalize.css'; 
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@700&display=swap');
 
 :root {
     --sync: calc(1vw + 1vh);
     --border: 2px solid rgb(64, 175, 140);
     --green: rgb(64, 175, 140);
+    --yellow: rgb(218, 218, 87);
     --green-hover: rgb(7, 144, 101);
     --transition: transform .75 cubic-bezier(.075, .5, 0, 1);
     --font: 'Ubuntu', sans-serif;
@@ -145,12 +147,23 @@ onMounted(() => {
     background-color: rgba(0, 0, 0, 0);
 }
 
+::selection {
+    color: rgb(0, 0, 0);
+    background-color: rgb(92, 224, 182);
+}
+
 body {
     background-color: rgb(23, 24, 24);
     font-family: sans-serif;
     color: whitesmoke;
 }
-
+a {
+    color: var(--yellow);
+    cursor: pointer;
+}
+a:hover {
+    color: orange;
+}
 .layer {
     position: absolute;
     width: 100%;

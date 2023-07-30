@@ -65,18 +65,5 @@
     font-size: calc(var(--sync) * 2.8);
 }
 
-/* DELETE!!! */
-.TEST-BLOCK{
-    position: fixed;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    z-index: 9999999999999999;
-    background-color: rgba(0, 0, 0, .5);
-    width: 50%;
-    height: 50%;
-    border-radius: 30px;
-    padding: 30px;
-}
+
 </style>
