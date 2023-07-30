@@ -13,7 +13,7 @@
                     <!-- Slides -->
                     <mainComp class="swiper-slide" @slideToPlaces="slideTo(2, 'Places')"></mainComp>
                     <ticketsComp class="swiper-slide"></ticketsComp>
-                    <placesComp class="swiper-slide"></placesComp>
+                    <placesComp :is-open="currentBlock.title === 'Places'" class="swiper-slide"></placesComp>
                     <aboutComp class="swiper-slide"></aboutComp>
                 </div>
             </div>

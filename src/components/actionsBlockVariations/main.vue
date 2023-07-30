@@ -175,7 +175,7 @@ onMounted(() => {
 .part__heading {
     width: max-content;
     background: var(--green);
-    color: black;
+    color: rgb(50, 50, 50);
     font-size: 1.7em;
     padding: 0 20px 0 5px;
     box-shadow: var(--box-shadow);

@@ -128,6 +128,7 @@ onMounted(() => {
     --border: 2px solid rgb(64, 175, 140);
     --green: rgb(64, 175, 140);
     --yellow: rgb(218, 218, 87);
+    --yellow-hover: orange;
     --green-hover: rgb(7, 144, 101);
     --transition: transform .75 cubic-bezier(.075, .5, 0, 1);
     --font: 'Ubuntu', sans-serif;
