@@ -1,14 +1,23 @@
 <template>
-    <div class="action-block__tickets">
-        Tickets
+    <div>
+        <div class="tickets-block">
+            <nav class="tickets-block__sorting">
+                
+            </nav>
+            <ticketItem></ticketItem>
+        </div>
     </div>
 </template>
 
 <script setup>
+import ticketItem from '@/components/ticketItem.vue';
 
 </script>
 
 <style scoped>
-.action-block__tickets {
+.tickets-block {
+    height: 100%;
+    border-top: var(--border);
+    margin-top: 5px;
 }
 </style>
