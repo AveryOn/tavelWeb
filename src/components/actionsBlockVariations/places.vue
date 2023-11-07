@@ -1,22 +1,22 @@
 <template>
     <div style="position: relative;">
         <div class="action-block__places">
-            <div class="places__first-part">
+            <div class="places__first-part" v-show="!place.isSelect">
                 <div class="flags">
                     <!-- Alaska -->
                     <div class="flag__container">
                         <h2 class="flag__title">Alaska</h2>
-                        <div>
+                        <div @click="e => selectPlace(e)">
                             <img class="flag" id="Alaska" src="../../images/flags/Alaska.jpg">
                             <img class="ghost" id="alaska-ghost" src="../../images/ghosts/Alaska_ghost.png"
                                 alt="alaska-ghost">
-                        </div>
+                        </div> 
                     </div>
 
                     <!-- Canada -->
                     <div class="flag__container">
                         <h2 class="flag__title">Canada</h2>
-                        <div>
+                        <div @click="e => selectPlace(e)">
                             <img class="flag" id="Canada" src="../../images/flags/Canada.png">
                             <img class="ghost" id="canada-ghost" src="../../images/ghosts/Canada-ghost.png"
                                 alt="canada-ghost">
@@ -26,7 +26,7 @@
                     <!-- USA -->
                     <div class="flag__container">
                         <h2 class="flag__title">United States of America</h2>
-                        <div>
+                        <div @click="e => selectPlace(e)">
                             <img class="flag" id="USA" src="../../images/flags/USA.jpg">
                             <img class="ghost" id="usa-ghost" src="../../images/ghosts/usa_ghost.png" alt="usa-ghost">
                         </div>
@@ -37,8 +37,9 @@
                     <h1 class="places__description--title second">{{ titleSecond }}</h1>
                 </div>
             </div>
-            <div class="places__second-part" v-show="false">
 
+            <div class="places__second-part" v-show="place.isSelect">
+                <placeDescription :active-place="place.id"></placeDescription>
             </div>
         </div>
     </div>
@@ -46,7 +47,8 @@
 
 <script setup>
 import animateText from '@/tools/animations';
-import { ref, watch, onMounted } from 'vue';
+import placeDescription from '@/components/placeDescription.vue';
+import { ref, reactive, watch, onMounted } from 'vue';
 import { gsap } from 'gsap';
 
 const props = defineProps({
@@ -54,6 +56,11 @@ const props = defineProps({
         type: Boolean,
         default: false,
     }
+});
+
+const place = reactive({
+    id: '',
+    isSelect: false,
 });
 
 function hover(elementID, isEnter) {
@@ -88,8 +95,17 @@ function appearDescription() {
         } catch (err) {
             reject(err);
         }
-    })
+    });
 }
+
+const tl = gsap.timeline();
+async function selectPlace(element) {
+    await tl.to(".places__first-part", { top: '-200vh', duration: 0.5 });
+    place.id = element.target.id;
+    place.isSelect = true;
+    await tl.to('.places__second-part', { top: '0', duration: 0.5 });
+}
+
 
 onMounted(() => {
     watch(() => props.isOpen, async(value) => {
@@ -135,7 +151,7 @@ onMounted(() => {
 
 .places__second-part {
     position: absolute;
-    top: 0;
+    top: 100vh;
     right: 0;
     bottom: 0;
     left: 0;

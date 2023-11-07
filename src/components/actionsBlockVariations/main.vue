@@ -44,7 +44,6 @@ async function pushUp() {
     currentPage.value = 'up';
     await tl.to(".part.main__part-first", { top: 20, duration: 1 });
 }
-
 async function pushDown() {
     console.log(currentPage.value);
     await tl.to(".part.main__part-first", { top: '-80vh', duration: 0.5 });
@@ -52,11 +51,6 @@ async function pushDown() {
     await tl.to(".part.main__part-second", { top: '15%', duration: 1 });
  
 }
-
-onMounted(() => {
-
-})
-
 
 </script>
 

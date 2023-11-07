@@ -11,6 +11,8 @@
 
 <script setup>
 import ticketItem from '@/components/ticketItem.vue';
+import { onMounted } from 'vue';
+
 
 </script>
 
